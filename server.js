@@ -406,14 +406,11 @@ app.post('/api/search/image/', upload.single('image'), function (req, res, next)
         // handle the situation where the detected looks like this --- Iron/Fer, in long-text spliting
         let eng_fr = raw.filter(phrase => /\w\/\w/.test(phrase));
         raw.forEach(function(phrase) {
-            // console.log(phrase);
             let basic = phrase.split("/")[0];
-            // console.log(phrase);
             let remove_total_filtered = basic.replace("Total", "");
             // handle the situation when Google API detects '0' into 'O'
             let remove_uppero_filtered = remove_total_filtered.split('O')[0]
             let further_filtered = remove_uppero_filtered.split(/(\d+)/)[0].trim()
-            // console.log(remove_total_filtered);
             if (further_filtered != "Calories" && further_filtered != "Includes") nutrients.push(further_filtered);
         });
         eng_fr.forEach(function(phrase) {
@@ -493,16 +490,12 @@ app.post('/api/search/image/', upload.single('image'), function (req, res, next)
                             coordinates["xMax"] = xmax;
                             coordinates["xMin"] = xmin;            
                             console.log(`Successfully match ${nutrient}`)
-                            // console.log(coordinates);
                             json_result[nutrient.split("/")[0].toLowerCase()] = coordinates;
                             break;
                         }
                     }
                 }
-                // console.log(keywords.filter(keyword => keyword.description == splited[0]));
                 let index = keywords.indexOf(keywords.filter(keyword => keyword.description == splited[0]), 2);
-                // console.log(index);
-                // detail = keywords.filter();
             }
         });
         json_result['width'] = width;
@@ -536,13 +529,6 @@ app.post('/api/search/image/', upload.single('image'), function (req, res, next)
                     // get the imageID
                     images.findOne({path: bucket_path}, {projection: {_id: 1}}, function(err, image) {
                         db.close();
-                        // console.log(nutrients);
-                        // return res.json(results[0]);
-                        // console.log(nutrients);
-                        // console.log(json_result);
-                        // return res.json(results[0].textAnnotations[0].description.split("\n"));
-                        // return res.json(nutrients);
-                        // console.log(req.username);
                         json_result['id'] = image._id;
                         return res.json(json_result);
                     });
@@ -557,7 +543,6 @@ app.post('/api/search/image/', upload.single('image'), function (req, res, next)
     });
 });
 
-// need to update the method
 app.get('/api/nutrient/:name/', function (req, res, next) {
     mongoClient.connect(dbUrl, {useNewUrlParser: true}, function(err, db) {
         if (err) return res.status(500).end("Oppps!Serer side error!");
