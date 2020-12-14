@@ -256,10 +256,6 @@ app.get('/api/report/:imageid/', isAuthenticated, function (req, res, next) {
             let report_path = report.path;
             let result = {};
             result['url'] = `${public_access_url}${report_path}`;
-            // res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-	        // res.setHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE, TRACE, OPTIONS, PATCH");
-            // res.setHeader("Access-Control-Allow-Origin", req.getHeader("Origin"));
-            // res.setHeader("Access-Control-Allow-Credentials","true");
             return res.json(result);
         });    
     });
