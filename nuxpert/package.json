@@ -5,7 +5,7 @@
   "kartik-v/bootstrap-fileinput": "dev-master",
   "dependencies": {
     "@google-cloud/storage": "^2.4.3",
-    "axios": "^0.18.0",
+    "axios": ">=0.21.1",
     "bootstrap-fileinput": "^4.5.2",
     "concurrently": "^4.1.0",
     "cors": "^2.8.5",
